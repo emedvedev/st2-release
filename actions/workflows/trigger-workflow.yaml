@@ -19,7 +19,7 @@ st2-release.trigger:
       publish:
         execution: <% $.request.result %>
       on-success: confirm
-      on-failure: wrong_execution
+      on-error: wrong_execution
     confirm:
       action: st2-release.confirm
       input:
