@@ -3,6 +3,8 @@ name: "request"
 action_ref: "st2-release.request"
 description: "Request a release."
 formats:
-    - "release {{ type=patch }}( version)?"
+  - display: "release {{ type=patch }}"
+    representation:
+      - "release {{ type=patch }}( version)?"
 ack:
   enabled: false
