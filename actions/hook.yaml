@@ -2,9 +2,11 @@
 name: hook
 enabled: true
 description: Hook action so that previous reviews could be checked.
-runner_type: noop
-entry_point:
+runner_type: local-shell-cmd
 parameters:
+  cmd:
+    type: string
+    default: 'echo'
   id:
     type: string
   status:

@@ -8,7 +8,8 @@ formats:
       - '\+1( on)? {{ id }}'
       - 'confirm {{ id }}'
 ack:
-  enabled: false
+  format: great! Let me do the usual checks and then we can get the release going.
+  append_url: false
 result:
   format: |
     {% if execution.result.confirmation.status == 'wrong ref' %}

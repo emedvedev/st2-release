@@ -15,7 +15,7 @@ st2-release.trigger:
       publish:
         request_ref: <% $.release_request.result.action.ref %>
         request_timestamp: <% $.release_request.result.end_timestamp %>
-        request_user: <% $.release_request.result.result.user %>
+        request_user: "<% $.release_request.result.get(result, dict()).get(user, '') %>"
         request_id: <% $.release_request.result.id %>
       on-success: previous_triggers
       on-error: wrong_execution
@@ -23,6 +23,7 @@ st2-release.trigger:
       action: st2.executions.list
       input:
         action: st2-release.hook
+        status: success
       publish:
         previous: <% $.previous_triggers.result %>
       on-success: confirm

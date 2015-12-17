@@ -12,20 +12,16 @@ class ConfirmAction(Action):
         if request_ref != 'st2-release.request':
             return {'status': 'wrong ref'}
 
-        # confirmed
         if arrow.get(request_timestamp).replace(hours=+2) < arrow.now():
             return {'status': 'too old'}
 
-        # confirmed
-        # if request_user == user:
-        #    return {'status': 'same user'}
+        if request_user == user:
+            return {'status': 'same user'}
 
-        #
-        for previous_execution in previous:
-            print previous_execution.result
-            print previous_execution.result.confirmation
-            if previous_execution.parameters.id == request_id \
-               and previous_execution.result.confirmation.status == 'success':
+        for review in previous:
+            print review
+            if review['parameters']['id'] == request_id \
+               and review['parameters']['status'] == 'success':
                 return {'status': 'duplicate'}
 
         return {'status': 'success'}
