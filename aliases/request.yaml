@@ -7,12 +7,12 @@ formats:
     representation:
       - 'release( a)? {{ type=patch }}( version)?'
 ack:
-  format: "Oh, exciting! Let me gather some info, and then we can ask the team."
+  format: "Oh, exciting! Let me gather some points of data into a beautiful line, and then we can ask the team."
   append_url: false
 result:
   format: >
     let's do it!
-    @channel: @{{ execution.id }} wants to do a {{ execution.parameters.type }} release (which would be {{ execution.result.tasks[0].result.result.next }}).
+    @channel: @{{ execution.user }} wants to do a {{ execution.parameters.type }} release (which would be {{ execution.result.tasks[0].result.result.next }}).
     To make sure we don't screw things up, someone else has to make sure `master` is stable enough and then confirm with `confirm {{ execution.id }}`.
     {% if execution.result.tasks[1].result.result|length %}
     FYI, here's what happened since the last release: {~}

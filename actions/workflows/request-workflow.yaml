@@ -5,8 +5,7 @@ st2-release.request:
   description: A workflow for requesting a StackStorm release.
   input:
     - type
-  output:
-    user: <% $.action_context.api_user %>
+    - user
   tasks:
     latest_release:
       # [105, 26]
