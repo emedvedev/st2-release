@@ -1,0 +1,6 @@
+---
+name : st2release
+description : actions and aliases for StackStorm proposed JIT release machinery
+version : 0.1
+author : emedvedev
+email : emedvedev@stackstorm.com

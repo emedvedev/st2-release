@@ -1,0 +1,14 @@
+---
+name: "confirm"
+action_ref: "st2-release.confirm"
+description: "Confirm a release."
+formats:
+    - display: "confirm {{ id }}"
+      representation:
+        - "+1( on)? {{ id }}"
+        - "release {{ id }}"
+        - "confirm {{ id }}"
+ack:
+  enabled: false
+result:
+  enabled: false

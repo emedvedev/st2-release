@@ -1,0 +1,20 @@
+version: '2.0'
+
+st2-release.request:
+    description: A workflow for requesting a StackStorm release.
+    type: direct
+    input:
+        - type
+        - user
+    output:
+        stdout: <% $.stdout %>
+        user: <% $.user %>
+    tasks:
+        latest_release:
+            action: st2-release.latest_release
+            publish:
+                date: <% $.latest_release.stdout %>
+        merged_prs:
+            action: github.list_issues since=<% $.date %> limit=100 state="merged"
+            publish:
+                prs: <% $.merged_prs.stdout %>

@@ -1,0 +1,23 @@
+version: '2.0'
+
+st2-release.trigger:
+    description: A workflow for triggering a confirmed StackStorm release.
+    type: direct
+    input:
+        - id
+        - user
+    output:
+        stdout: <% $.stdout %>
+    tasks:
+        request:
+            action: st2.execution.get id=<% $.id %>
+            publish:
+                execution: <% $.request.stdout %>
+        confirm:
+            action: st2-release.confirm execution=<% $.execution %>
+            publish:
+                confirmation: <% $.confirm.stdout %>
+        release:
+            action: st2-release.release
+            publish:
+                released: <% $.release.stdout %>

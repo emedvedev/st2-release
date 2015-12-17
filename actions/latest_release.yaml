@@ -1,0 +1,7 @@
+---
+name: "st2-release.latest_release"
+enabled: true
+description: "Get the latest release date."
+runner_type: run-python
+entry_point: latest_release.py
+parameters:
