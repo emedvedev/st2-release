@@ -9,3 +9,19 @@ formats:
       - 'confirm {{ id }}'
 ack:
   enabled: false
+result:
+  format: |
+    {% if execution.result.status = 'wrong ref' %}
+    that ID you gave me points to a wrong execution. I'm not stupid, yo.
+    {% elif execution.result.status = 'too old' %}
+    that request is more than two hours old. That's, like, gazillion years in my robotic world. Start a new one!
+    {% elif execution.result.status = 'same user' %}
+    lololol. Nice try, but you can't review your own request. No ninja stuff. http://i.imgur.com/bW6YOYS.jpg
+    {% elif execution.result.status = 'duplicate' %}
+    don't be so slow. This one is already reviewed.
+    {% elif execution.result.status = 'success' %}
+    nice! I'm getting the gears going. Well, not really, it's just a dry run. Still, congrats for testing this! :heart:
+    {% else %}
+    something went terribly wrong here.
+    {% endif %}
+    {~}
