@@ -13,18 +13,25 @@ st2-release.trigger:
     stdout: <% $.stdout %>
   tasks:
     request:
-      action: st2.execution.get
+      action: st2.executions.get
       input:
         id: <% $.id %>
       publish:
         execution: <% $.request.result %>
-      on-success: confirm
+      on-success: previous_triggers
       on-error: wrong_execution
+    previous_triggers:
+      action: st2.executions.list
+      input:
+        action: st2-release.trigger
+        status: success
+      on-success: confirm
     confirm:
       action: st2-release.confirm
       input:
         execution: <% $.execution %>
         user: <% $.user %>
+        previous: <% $.previous_triggers.result %>
       publish:
         confirmation: <% $.confirm.result %>
     wrong_execution:

@@ -12,3 +12,6 @@ parameters:
   user:
     type: string
     required: true
+  previous:
+    type: object
+    required: true

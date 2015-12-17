@@ -1,3 +1,4 @@
+import arrow
 from st2actions.runners.pythonrunner import Action
 
 __all__ = [
@@ -6,18 +7,19 @@ __all__ = [
 
 
 class ConfirmAction(Action):
-    def run(self, execution, user):
+    def run(self, execution, user, previous):
 
-        # check the execution action ref has the correct type (st2-release.request)
-        # return { 'status': 'wrong ref' }
+        if execution.action.ref != 'st2-release.request':
+            return {'status': 'wrong ref'}
 
-        # date isn't +2 hours
-        # return { 'status': 'too old' }
+        if arrow.get(execution.end_timestamp).replace(hours=+2) < arrow.now():
+            return {'status': 'too old'}
 
-        # requester vs confirming user
-        # return { 'status': 'same user' }
+        if execution.result.user == user:
+            return {'status': 'same user'}
 
-        # hasn't been run yet
-        # return { 'status': 'duplicate' }
+        for previous_execution in previous:
+            if previous_execution.parameters.id == execution.id:
+                return {'status': 'duplicate'}
 
-        return {'status': 'success', 'execution': execution, 'user': user}
+        return {'status': 'success', 'previous': previous}

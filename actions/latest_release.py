@@ -1,5 +1,3 @@
-# parse the changelog for the latest release date
-
 import requests
 import re
 import arrow
