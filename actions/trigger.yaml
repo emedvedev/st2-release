@@ -9,5 +9,3 @@ parameters:
     description: Execution id of the release request
     required: true
     type: string
-  user:
-    default: "{{ action_context.api_user }}"
