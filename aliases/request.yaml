@@ -7,4 +7,12 @@ formats:
     representation:
       - 'release( a)? {{ type=patch }}( version)?'
 ack:
-  enabled: false
+  format: "Oh, exciting! Let me gather some info and then we can ask the team."
+  append_url: false
+result:
+  format: >
+    let's do it!
+    @channel: @{{ action_context.api_user }} wants to do a {{ action_context.type }} release (which would be {{ request.next }}).
+    To make sure we don't screw things up, someone else has to make sure `master` is stable enough and then confirm with `confirm {{ execution.id }}`.
+    FYI, here's what happened since the last release: {~}
+    123456
