@@ -13,5 +13,5 @@ parameters:
     type: string
     required: true
   previous:
-    type: list
+    type: array
     required: true
