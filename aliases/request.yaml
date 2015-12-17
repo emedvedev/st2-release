@@ -12,7 +12,13 @@ ack:
 result:
   format: >
     let's do it!
-    @channel: @{{ action_context.api_user }} wants to do a {{ action_context.type }} release (which would be {{ request.next }}).
+    @channel: @{{ execution.user }} wants to do a {{ execution.type }} release (which would be {{ execution.result.next }}).
     To make sure we don't screw things up, someone else has to make sure `master` is stable enough and then confirm with `confirm {{ execution.id }}`.
+    {% if execution.result.list_issues.result|length %}
     FYI, here's what happened since the last release: {~}
-    123456
+    {% for pr in execution.result.list_issues.result %}
+    {{ loop.index }}. {{ pr.title }}*: {{ pr.url }}
+    {% endfor %}
+    {% else %}
+    {~}
+    {% endif %}
