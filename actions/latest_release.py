@@ -17,4 +17,4 @@ DATE_MATCH = r'\d+\.\d+\.\d+ - (\w+ \d{2}, \d{4})'
 class LatestReleaseAction(Action):
     def run(self):
         date_string = re.search(DATE_MATCH, requests.get(DOCS_URL).text).groups()[0]
-        return str(arrow.get(date_string, 'MMMM DD, YYYY'))
+        return arrow.get(date_string, 'MMMM DD, YYYY').timestamp
