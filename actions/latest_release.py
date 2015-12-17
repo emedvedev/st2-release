@@ -3,6 +3,7 @@
 import requests
 import re
 import arrow
+import semver
 
 from st2actions.runners.pythonrunner import Action
 
@@ -11,10 +12,14 @@ __all__ = [
 ]
 
 DOCS_URL = 'https://github.com/StackStorm/st2/blob/master/CHANGELOG.rst'
-DATE_MATCH = r'\d+\.\d+\.\d+ - (\w+ \d{2}, \d{4})'
+DATE_MATCH = r'(\d+\.\d+\.\d+) - (\w+ \d{2}, \d{4})'
 
 
 class LatestReleaseAction(Action):
     def run(self):
-        date_string = re.search(DATE_MATCH, requests.get(DOCS_URL).text).groups()[0]
-        return arrow.get(date_string, 'MMMM DD, YYYY').timestamp
+        version, date = re.search(DATE_MATCH, requests.get(DOCS_URL).text).groups()
+        return {
+          'timestamp': arrow.get(date, 'MMMM DD, YYYY').timestamp,
+          'current': version,
+          'next': semver.bump_patch(version)
+        }

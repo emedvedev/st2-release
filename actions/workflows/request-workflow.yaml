@@ -12,12 +12,12 @@ st2-release.request:
       action: st2-release.latest_release
       on-success:
         - merged_prs
-    merged_prs:
+    list_issues:
       # [105, 128]
       action: github.list_issues
       input:
-        since: <% $.latest_release.result %>
+        since: <% $.latest_release.result.timestamp %>
         limit: 100
-        state: merged
+        state: closed
         repo: st2
         user: stackstorm
