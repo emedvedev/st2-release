@@ -11,7 +11,7 @@ st2-release.request:
       # [105, 26]
       action: st2-release.latest_release
       on-success:
-        - merged_prs
+        - list_issues
     list_issues:
       # [105, 128]
       action: github.list_issues

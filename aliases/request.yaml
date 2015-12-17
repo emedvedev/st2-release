@@ -5,6 +5,6 @@ description: Request a release.
 formats:
   - display: release {{ type=patch }}
     representation:
-      - 'release {{ type=patch }}( version)?'
+      - 'release( a)? {{ type=patch }}( version)?'
 ack:
   enabled: false
