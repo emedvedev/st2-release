@@ -10,15 +10,18 @@ ack:
   format: "Oh, exciting! Let me gather some points of data into a beautiful line, and then we can ask the team."
   append_url: false
 result:
-  format: >
+  format: |
     let's do it!
-    @channel: @{{ execution.user }} wants to do a {{ execution.parameters.type }} release (which would be {{ execution.result.tasks[0].result.result.next }}).
-    To make sure we don't screw things up, someone else has to make sure `master` is stable enough and then confirm with `confirm {{ execution.id }}`.
-    {% if execution.result.tasks[1].result.result|length %}
+
+    @channel: @{{ execution.result.user }} wants to do a {{ execution.parameters.type }} release ({{ execution.result.tasks[0].result.result.next }}).
+    To make sure we don't screw things up, review carefully and then confirm with `!confirm {{ execution.id }}`.
+    {% if execution.result.tasks[1].result.result|selectattr("is_pull_request")|length %}
+
     FYI, here's what happened since the last release: {~}
-    {% for pr in execution.result.tasks[1].result.result %}
+    {% for pr in execution.result.tasks[1].result.result|selectattr("is_pull_request") %}
     {{ loop.index }}. {{ pr.title }}: {{ pr.url }}
     {% endfor %}
     {% else %}
     {~}
     {% endif %}
+
