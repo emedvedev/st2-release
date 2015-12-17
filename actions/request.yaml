@@ -11,4 +11,6 @@ parameters:
     enum:
       - patch
   user:
+    type: string
+    required: true
     default: "{{ action_context.api_user }}"
