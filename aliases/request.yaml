@@ -7,7 +7,7 @@ formats:
     representation:
       - 'release( a)? {{ type=patch }}( version)?'
 ack:
-  format: "Oh, exciting! Let me gather some info and then we can ask the team."
+  format: "Oh, exciting! Let me gather some info, and then we can ask the team."
   append_url: false
 result:
   format: >
