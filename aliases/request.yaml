@@ -1,10 +1,10 @@
 ---
-name: "request"
-action_ref: "st2-release.request"
-description: "Request a release."
+name: request
+action_ref: st2-release.request
+description: Request a release.
 formats:
-  - display: "release {{ type=patch }}"
+  - display: release {{ type=patch }}
     representation:
-      - "release {{ type=patch }}( version)?"
+      - 'release {{ type=patch }}( version)?'
 ack:
   enabled: false

@@ -1,13 +1,13 @@
 ---
-name: "st2-release.trigger"
+name: trigger
 enabled: true
-description: "Triggers a release."
+description: Triggers a release.
 runner_type: mistral-v2
 entry_point: workflows/trigger-workflow.yaml
 parameters:
   id:
-    description: "Execution id of the release request"
+    description: Execution id of the release request
     required: true
     type: string
   user:
-    default: "{{ action_context.api_user }}"
+    default: {{ action_context.api_user }}

@@ -1,9 +1,9 @@
 ---
-name: "confirm"
-action_ref: "st2-release.trigger"
-description: "Confirm a release."
+name: confirm
+action_ref: st2-release.trigger
+description: Confirm a release.
 formats:
-  - display: "confirm {{ id }}"
+  - display: confirm {{ id }}
     representation:
       - '\+1( on)? {{ id }}'
       - 'confirm {{ id }}'

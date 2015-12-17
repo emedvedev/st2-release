@@ -1,6 +1,6 @@
 ---
-name: "st2-release.release"
+name: release
 enabled: true
-description: "Get the release machinery going."
+description: Get the release machinery going.
 runner_type: run-python
 entry_point: release.py

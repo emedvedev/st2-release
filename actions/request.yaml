@@ -1,14 +1,14 @@
 ---
-name: "st2-release.request"
+name: request
 enabled: true
-description: "Requests a release."
+description: Request a release.
 runner_type: mistral-v2
 entry_point: workflows/request-workflow.yaml
 parameters:
   type:
-    description: "Type of the release according to SemVer"
+    description: Type of the release according to SemVer
     required: true
     enum:
       - patch
   user:
-    default: "{{ action_context.api_user }}"
+    default: {{ action_context.api_user }}

@@ -1,11 +1,11 @@
 ---
-name: "st2-release.confirm"
+name: confirm
 enabled: true
-description: "Confirms a release."
+description: Confirms a release.
 runner_type: run-python
 entry_point: confirm.py
 parameters:
   execution:
-    description: "Execution of the release request"
+    description: Execution of the release request.
     required: true
     type: object
