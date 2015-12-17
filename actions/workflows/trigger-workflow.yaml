@@ -10,11 +10,15 @@ st2-release.trigger:
         stdout: <% $.stdout %>
     tasks:
         request:
-            action: st2.execution.get id=<% $.id %>
+            action: st2.execution.get
+            input:
+              id: <% $.id %>
             publish:
                 execution: <% $.request.stdout %>
         confirm:
-            action: st2-release.confirm execution=<% $.execution %>
+            action: st2-release.confirm
+            input:
+              execution: <% $.execution %>
             publish:
                 confirmation: <% $.confirm.stdout %>
         release:

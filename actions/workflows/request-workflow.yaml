@@ -13,6 +13,10 @@ st2-release.request:
         latest_release:
             action: st2-release.latest_release
         merged_prs:
-            action: github.list_issues since=<% $.release_date %> limit=100 state="merged"
+            action: github.list_issues
+            input:
+              since: <% $.latest_release.result %>
+              limit: 100
+              state: merged
             publish:
                 prs: <% $.merged_prs.stdout %>
