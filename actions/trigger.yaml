@@ -3,7 +3,7 @@ name: "st2-release.trigger"
 enabled: true
 description: "Triggers a release."
 runner_type: mistral-v2
-entry_point: trigger-workflow.yaml
+entry_point: workflows/trigger-workflow.yaml
 parameters:
   id:
     description: "Execution id of the release request"

@@ -3,7 +3,7 @@ name: "st2-release.request"
 enabled: true
 description: "Requests a release."
 runner_type: mistral-v2
-entry_point: request-workflow.yaml
+entry_point: workflows/request-workflow.yaml
 parameters:
   type:
     description: "Type of the release according to SemVer"
