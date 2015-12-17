@@ -1,7 +1,7 @@
 version: '2.0'
 
 st2-release.trigger:
-    description: A workflow for triggering a confirmed StackStorm release.
+    description: A workflow for confirming and triggering a StackStorm release.
     type: direct
     input:
         - id

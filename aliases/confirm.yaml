@@ -1,6 +1,6 @@
 ---
 name: "confirm"
-action_ref: "st2-release.confirm"
+action_ref: "st2-release.trigger"
 description: "Confirm a release."
 formats:
     - display: "confirm {{ id }}"
