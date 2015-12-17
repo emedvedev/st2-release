@@ -5,8 +5,7 @@ description: "Confirm a release."
 formats:
   - display: "confirm {{ id }}"
     representation:
-      - "\+1( on)? {{ id }}"
-      - "release {{ id }}"
-      - "confirm {{ id }}"
+      - '\+1( on)? {{ id }}'
+      - 'confirm {{ id }}'
 ack:
   enabled: false
