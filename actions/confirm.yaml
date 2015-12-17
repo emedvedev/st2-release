@@ -13,5 +13,5 @@ parameters:
     type: string
     required: true
   previous:
-    type: object
+    type: list
     required: true
