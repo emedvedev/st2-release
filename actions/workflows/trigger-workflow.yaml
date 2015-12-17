@@ -49,4 +49,4 @@ st2-release.trigger:
       input:
         channel: <% $.channel %>
         user: <% $.user %>
-        message: "lol, say what? That's not even a correct id.{~}"
+        message: "lol, say what? That's not even a correct ID.{~}"
