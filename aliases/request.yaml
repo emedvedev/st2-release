@@ -15,7 +15,7 @@ result:
 
     @channel: @{{ execution.result.user }} wants to do a {{ execution.parameters.type }} release ({{ execution.result.tasks[0].result.result.next }}).
     To make sure we don't screw things up, review carefully and then confirm with `!confirm {{ execution.id }}`.
-    {% if execution.result.tasks[1].result.result|selectattr("is_pull_request")|length %}
+    {% if execution.result.tasks[1].result.result|selectattr("is_pull_request")|list|length %}
 
     FYI, here's what happened since the last release: {~}
     {% for pr in execution.result.tasks[1].result.result|selectattr("is_pull_request") %}

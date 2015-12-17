@@ -19,7 +19,7 @@ class LatestReleaseAction(Action):
     def run(self):
         version, date = re.search(DATE_MATCH, requests.get(DOCS_URL).text).groups()
         return {
-          'timestamp': arrow.get(date, 'MMMM DD, YYYY').timestamp,
+          'timestamp': arrow.get(date, 'MMMM DD, YYYY').replace(days=+1).timestamp,
           'current': version,
           'next': semver.bump_patch(version)
         }
