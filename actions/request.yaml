@@ -14,3 +14,7 @@ parameters:
     type: string
     required: true
     default: "{{ action_context.api_user }}"
+  channel:
+    type: string
+    required: true
+    default: "{{ action_context.source_channel }}"

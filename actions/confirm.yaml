@@ -9,3 +9,6 @@ parameters:
     description: Execution of the release request.
     required: true
     type: object
+  user:
+    type: string
+    required: true

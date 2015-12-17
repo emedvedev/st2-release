@@ -1,3 +1,5 @@
+# there's no action with the same ref
+
 ---
 version: '2.0'
 
@@ -5,6 +7,8 @@ st2-release.trigger:
   description: A workflow for confirming and triggering a StackStorm release.
   input:
     - id
+    - user
+    - channel
   output:
     stdout: <% $.stdout %>
   tasks:
@@ -13,16 +17,19 @@ st2-release.trigger:
       input:
         id: <% $.id %>
       publish:
-        execution: <% $.request.stdout %>
+        execution: <% $.request.result %>
       on-success: confirm
+      on-failure: wrong_execution
     confirm:
       action: st2-release.confirm
       input:
         execution: <% $.execution %>
+        user: <% $.user %>
       publish:
-        confirmation: <% $.confirm.stdout %>
-      on-success: release
-    release:
-      action: st2-release.release
-      publish:
-        released: <% $.release.stdout %>
+        confirmation: <% $.confirm.result %>
+    wrong_execution:
+      action: chatops.post_message
+      input:
+        channel: <% $.channel %>
+        user: <% $.user %>
+        message: "lol, say what? That's not even an execution id."
