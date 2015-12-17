@@ -12,8 +12,6 @@ st2-release.request:
     tasks:
         latest_release:
             action: st2-release.latest_release
-            publish:
-                release_date: <% $.latest_release.stdout %>
         merged_prs:
             action: github.list_issues since=<% $.release_date %> limit=100 state="merged"
             publish:
