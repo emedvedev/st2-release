@@ -5,10 +5,18 @@ description: Confirms a release.
 runner_type: run-python
 entry_point: confirm.py
 parameters:
-  execution:
-    description: Execution of the release request.
+  request_ref:
     required: true
-    type: object
+    type: string
+  request_user:
+    required: true
+    type: string
+  request_timestamp:
+    required: true
+    type: string
+  request_id:
+    required: true
+    type: string
   user:
     type: string
     required: true

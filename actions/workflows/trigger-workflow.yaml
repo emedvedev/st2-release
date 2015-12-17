@@ -1,5 +1,3 @@
-# there's no action with the same ref
-
 ---
 version: '2.0'
 
@@ -9,31 +7,42 @@ st2-release.trigger:
     - id
     - user
     - channel
-  output:
-    stdout: <% $.stdout %>
   tasks:
-    request:
+    release_request:
       action: st2.executions.get
       input:
         id: <% $.id %>
       publish:
-        execution: <% $.request.result %>
+        request_ref: <% $.release_request.result.action.ref %>
+        request_timestamp: <% $.release_request.result.end_timestamp %>
+        request_user: <% $.release_request.result.result.user %>
+        request_id: <% $.release_request.result.id %>
       on-success: previous_triggers
       on-error: wrong_execution
     previous_triggers:
       action: st2.executions.list
       input:
-        action: st2-release.trigger
-        status: success
+        action: st2-release.hook
+      publish:
+        previous: <% $.previous_triggers.result %>
       on-success: confirm
     confirm:
       action: st2-release.confirm
       input:
-        execution: <% $.execution %>
+        request_ref: <% $.request_ref %>
+        request_timestamp: <% $.request_timestamp %>
+        request_user: <% $.request_user %>
+        request_id: <% $.request_id %>
         user: <% $.user %>
-        previous: <% $.previous_triggers.result %>
+        previous: <% $.previous %>
       publish:
         confirmation: <% $.confirm.result %>
+      on-success: hook
+    hook:
+      action: st2-release.hook
+      input:
+        id: <% $.id %>
+        status: <% $.confirmation.status %>
     wrong_execution:
       action: chatops.post_message
       input:

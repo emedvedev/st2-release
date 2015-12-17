@@ -1,0 +1,11 @@
+---
+name: hook
+enabled: true
+description: Hook action so that previous reviews could be checked.
+runner_type: noop
+entry_point:
+parameters:
+  id:
+    type: string
+  status:
+    type: string
