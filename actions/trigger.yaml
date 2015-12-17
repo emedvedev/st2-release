@@ -10,4 +10,4 @@ parameters:
     required: true
     type: string
   user:
-    default: {{ action_context.api_user }}
+    default: "{{ action_context.api_user }}"
