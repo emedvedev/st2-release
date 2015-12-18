@@ -18,10 +18,7 @@ class ConfirmAction(Action):
         if request_user == user:
             return {'status': 'same user'}
 
-        for review in previous:
-            print review
-            if review['parameters']['id'] == request_id \
-               and review['parameters']['status'] == 'success':
-                return {'status': 'duplicate'}
+        if previous > 0:
+            return {'status': 'duplicate'}
 
         return {'status': 'success'}
