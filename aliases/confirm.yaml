@@ -15,7 +15,7 @@ result:
     {% if 'error' in execution.result %}
     {{ execution.result.error }}
     {% elif execution.result.confirmation.status == 'wrong ref' %}
-    that ID you gave me points to a wrong execution. I'm not stupid, yo.
+    that ID you gave me points to a wrong execution. I'm not stupid, yo. http://i.imgur.com/9Ns8fPM.png
     {% elif execution.result.confirmation.status == 'too old' %}
     that request is more than two hours old. That's, like, gazillion years in my robotic world. Start a new one!
     {% elif execution.result.confirmation.status == 'same user' %}

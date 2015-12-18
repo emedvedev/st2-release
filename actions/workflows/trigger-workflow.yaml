@@ -13,8 +13,8 @@ st2-release.trigger:
       input:
         id: <% $.id %>
       on-success:
-        - dupes: <% $.release_request.result %>
-        - wrong_execution: <% not $.release_request.result %>
+        - dupes: "<% $.release_request.result != null %>"
+        - wrong_execution: "<% $.release_request.result = null %>"
       on-error: unknown_error
     dupes:
       action: st2.executions.list
@@ -22,10 +22,10 @@ st2-release.trigger:
         action: st2-release.hook
         status: succeeded
       publish:
-        duplicate: "<% $.id in $.dupes.result.where($.parameters.status = 'success') %>"
+        duplicate: "<% $.id in $.dupes.result.where($.parameters.status = 'success').parameters.id %>"
       on-success:
-        - confirm: <% $.duplicate %>
-        - already_executed: <% not $.duplicate %>
+        - confirm: <% $.duplicate = false %>
+        - already_executed: <% $.duplicate = true %>
       on-error: unknown_error
     confirm:
       action: st2-release.confirm
@@ -49,7 +49,7 @@ st2-release.trigger:
       input:
         cmd: echo
       publish:
-        error: "lol, say what? That's not even a correct ID."
+        error: "lol, say what? That's not even a correct ID. http://i.imgur.com/9Ns8fPM.png"
     already_executed:
       action: core.local
       input:
