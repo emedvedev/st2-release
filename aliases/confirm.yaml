@@ -12,7 +12,9 @@ ack:
   append_url: false
 result:
   format: |
-    {% if execution.result.confirmation.status == 'wrong ref' %}
+    {% if 'error' in execution.result %}
+    {{ execution.result.error }}
+    {% elif execution.result.confirmation.status == 'wrong ref' %}
     that ID you gave me points to a wrong execution. I'm not stupid, yo.
     {% elif execution.result.confirmation.status == 'too old' %}
     that request is more than two hours old. That's, like, gazillion years in my robotic world. Start a new one!
@@ -21,6 +23,6 @@ result:
     {% elif execution.result.confirmation.status == 'success' %}
     nice! I'm getting the gears going. Well, not really, it's just a dry run. Still, congrats for testing this! :heart:
     {% else %}
-    something went terribly wrong here.
+    something went terribly wrong here. http://i.imgur.com/9Ns8fPM.png
     {% endif %}
     {~}
