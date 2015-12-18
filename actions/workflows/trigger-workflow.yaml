@@ -12,8 +12,10 @@ st2-release.trigger:
       action: st2.executions.get
       input:
         id: <% $.id %>
-      on-success: dupes
-      on-error: wrong_execution
+      on-success:
+        - dupes: <% $.release_request.result %>
+        - wrong_execution: <% not $.release_request.result %>
+      on-error: unknown_error
     dupes:
       action: st2.executions.list
       input:
@@ -24,6 +26,7 @@ st2-release.trigger:
       on-success:
         - confirm: <% $.duplicate %>
         - already_executed: <% not $.duplicate %>
+      on-error: unknown_error
     confirm:
       action: st2-release.confirm
       input:
@@ -34,11 +37,13 @@ st2-release.trigger:
       publish:
         confirmation: <% $.confirm.result %>
       on-success: hook
+      on-error: unknown_error
     hook:
       action: st2-release.hook
       input:
         id: <% $.id %>
         status: <% $.confirmation.status %>
+      on-error: unknown_error
     wrong_execution:
       action: core.local
       input:
