@@ -19,16 +19,17 @@ st2-release.trigger:
       input:
         action: st2-release.hook
         status: succeeded
+      publish:
+        duplicate_review: "<% len($.previous_triggers.result.where($.parameters.status = 'success' and $.parameters.id = env().st2_execution_id)) %>"
       on-success:
-        - confirm: <% len($.previous_triggers.result.where($.parameters.status = 'success')) = 0 %>
-        - duplicate: <% len($.previous_triggers.result.where($.parameters.status = 'success')) > 0 %>
+        - confirm: <% $.duplicate_review = 0 %>
+        - duplicate: <% $.duplicate_review > 0 %>
     confirm:
       action: st2-release.confirm
       input:
         request_ref: <% $.release_request.result.action.ref %>
         request_timestamp: <% $.release_request.result.end_timestamp %>
         request_user: "<% $.release_request.result.get(result, dict()).get(user, '') %>"
-        request_id: <% $.release_request.result.id %>
         user: <% $.user %>
       publish:
         confirmation: <% $.confirm.result %>

@@ -7,7 +7,7 @@ __all__ = [
 
 
 class ConfirmAction(Action):
-    def run(self, user, request_ref, request_timestamp, request_user, request_id):
+    def run(self, user, request_ref, request_timestamp, request_user):
 
         if request_ref != 'st2-release.request':
             return {'status': 'wrong ref'}

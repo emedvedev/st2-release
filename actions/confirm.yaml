@@ -14,9 +14,6 @@ parameters:
   request_timestamp:
     required: true
     type: string
-  request_id:
-    required: true
-    type: string
   user:
     type: string
     required: true
