@@ -19,7 +19,9 @@ st2-release.trigger:
       input:
         action: st2-release.hook
         status: succeeded
-      on-success: confirm
+      on-success:
+        - confirm: <% len($.previous_triggers.result.where($.parameters.status = 'success')) = 0 %>
+        - duplicate: <% len($.previous_triggers.result.where($.parameters.status = 'success')) > 0 %>
     confirm:
       action: st2-release.confirm
       input:
@@ -28,7 +30,6 @@ st2-release.trigger:
         request_user: "<% $.release_request.result.get(result, dict()).get(user, '') %>"
         request_id: <% $.release_request.result.id %>
         user: <% $.user %>
-        previous: <% $.previous_triggers.result.where($.parameters.status = 'success').length() %>
       publish:
         confirmation: <% $.confirm.result %>
       on-success: hook
@@ -43,3 +44,9 @@ st2-release.trigger:
         channel: <% $.channel %>
         user: <% $.user %>
         message: "lol, say what? That's not even a correct ID.{~}"
+    duplicate:
+      action: chatops.post_message
+      input:
+        channel: <% $.channel %>
+        user: <% $.user %>
+        message: "don't be so slow. This one is already reviewed.{~}"

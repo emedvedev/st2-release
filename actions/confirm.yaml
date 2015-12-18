@@ -20,6 +20,3 @@ parameters:
   user:
     type: string
     required: true
-  previous:
-    type: integer
-    required: true

@@ -7,7 +7,7 @@ __all__ = [
 
 
 class ConfirmAction(Action):
-    def run(self, user, previous, request_ref, request_timestamp, request_user, request_id):
+    def run(self, user, request_ref, request_timestamp, request_user, request_id):
 
         if request_ref != 'st2-release.request':
             return {'status': 'wrong ref'}
@@ -17,8 +17,5 @@ class ConfirmAction(Action):
 
         if request_user == user:
             return {'status': 'same user'}
-
-        if previous > 0:
-            return {'status': 'duplicate'}
 
         return {'status': 'success'}
