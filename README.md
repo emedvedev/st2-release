@@ -1,6 +1,6 @@
 # StackStorm ChatOps Release
 
-An attempt to rub some ChatOps on st2 release machinery. Currently WIP, but it already works as a request-confirmation mechanics PoC.
+An attempt to rub some ChatOps on st2 release machinery. Currently WIP, but it already works as a proof of concept for the request-confirmation mechanics.
 
 ## Request-confirmation
 
